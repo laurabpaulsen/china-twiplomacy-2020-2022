@@ -1,3 +1,7 @@
+"""
+This python script is used to plot the average number of images and videos per tweet for original diplomats tweets as well as tweets retweeted by diplomats.
+"""
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib as mtpl
@@ -57,18 +61,20 @@ def plot_number_of_media_per_day(df, no_rt, figsize=(10, 10), media_type = 'phot
     # turn xticks 90 degrees
     plt.setp(ax.get_xticklabels(), rotation=90, ha='center')
     if lang == None:
-        plt.savefig(os.path.join('fig', f'n_{media_type}s.png'))
+        plt.savefig(os.path.join('figs', f'avg_{media_type}s.png'))
     else: 
-        plt.savefig(os.path.join('fig', f'n_{media_type}s_{lang}.png'))
+        plt.savefig(os.path.join('figs', f'avg_{media_type}s_{lang}.png'))
     plt.close()
 
-df = pd.read_csv('media_info.csv')
-df = df[df['category'] != 'Media']
-df['created_at'] = pd.to_datetime(df['created_at'], format = '%Y-%m-%d')
-df = df.sort_values(by='created_at')
-df_no_rt = df[df['retweet'] != 'retweeted']
 
-plot_number_of_media_per_day(df, df_no_rt)
-plot_number_of_media_per_day(df, df_no_rt, media_type = 'video')
-plot_number_of_media_per_day(df, df_no_rt, lang = 'en')
-plot_number_of_media_per_day(df, df_no_rt, media_type = 'video', lang = 'en')
+if __name__ == '__main__':
+    df = pd.read_csv('media_info.csv')
+    df = df[df['category'] != 'Media']
+    df['created_at'] = pd.to_datetime(df['created_at'], format = '%Y-%m-%d')
+    df = df.sort_values(by='created_at')
+    df_no_rt = df[df['retweet'] != 'retweeted']
+
+    plot_number_of_media_per_day(df, df_no_rt)
+    plot_number_of_media_per_day(df, df_no_rt, media_type = 'video')
+    plot_number_of_media_per_day(df, df_no_rt, lang = 'en')
+    plot_number_of_media_per_day(df, df_no_rt, media_type = 'video', lang = 'en')
