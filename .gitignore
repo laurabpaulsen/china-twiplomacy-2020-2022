@@ -7,7 +7,7 @@ cnenv
 *data*
 *newsFluxus*
 *fig*
-*plots*
+*/plots*
 bot-detection/covid19.zip
 bot-detection/cresci-2017.csv.zip
 bot-detection/mdl/bot_detect_mdl.sav
