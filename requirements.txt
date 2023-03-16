@@ -26,3 +26,9 @@ tesseract
 pytesseract
 opencv-python
 netgraph
+spacy
+pydantic==1.10.2
+stanza
+nltk
+gensim
+ruptures

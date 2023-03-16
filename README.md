@@ -74,6 +74,15 @@ open [here](https://htmlpreview.github.io/?https://github.com/centre-for-humanit
 #### Figure 8: Topic model (diplomats) - late period
 open [here](https://htmlpreview.github.io/?https://github.com/centre-for-humanities-computing/china-twiplomacy-2020-2022/blob/main/topic-model/plots/topic_model_diplomat_latedates.html)
 
+#### Figure 9: Topic model (media) - full period
+open [here](https://htmlpreview.github.io/?https://github.com/centre-for-humanities-computing/china-twiplomacy-2020-2022/blob/main/topic-model/plots/topic_model_media_alldates.html)
+
+#### Figure 10: Topic model (media) - early period
+open [here](https://htmlpreview.github.io/?https://github.com/centre-for-humanities-computing/china-twiplomacy-2020-2022/blob/main/topic-model/plots/topic_model_media_earlydates.html)
+
+#### Figure 11: Topic model (media) - late period
+open [here](https://htmlpreview.github.io/?https://github.com/centre-for-humanities-computing/china-twiplomacy-2020-2022/blob/main/topic-model/plots/topic_model_media_latedates.html)
+
 ## Network Analysis
 Network analysis performed using the networkx package in python (https://networkx.org/) and the network visualizations are generated from the file ```network_main.py``` (see usage below). 
 Nodes in the networks are Twitter handles, and edges (connections) are weighted by the number of mentions between the Twitter handles that are displayed. 
