@@ -1,5 +1,5 @@
-bot-detection/*data
-bot-detection/datasets_full.csv
+bot_detection/*data
+bot_detection/datasets_full.csv
 *.csv
 *ndjson
 *excel_sheets*
@@ -8,9 +8,9 @@ cnenv
 *newsFluxus*
 *fig*
 */plots*
-bot-detection/covid19.zip
-bot-detection/cresci-2017.csv.zip
-bot-detection/mdl/bot_detect_mdl.sav
+bot_detection/covid19.zip
+bot_detection/cresci-2017.csv.zip
+bot_detection/mdl/bot_detect_mdl.sav
 *xlsx
 *pyc
 *__pycache__*
