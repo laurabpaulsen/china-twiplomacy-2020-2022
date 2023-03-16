@@ -45,8 +45,8 @@ if __name__ == "__main__":
 
     # diplo
 
-    #diplo = data[(data["Category"] == "Diplomat")]
-    #best_diplo = diplo[diplo["Coherence"] == max(diplo["Coherence"])]
+    diplo = data[(data["Category"] == "Diplomat")]
+    best_diplo = diplo[diplo["Coherence"] == max(diplo["Coherence"])]
 
     # english text
     df = pd.read_csv(args['data'])
@@ -54,4 +54,4 @@ if __name__ == "__main__":
     df['text_clean'] = df['text_clean'].astype(str)
 
     gen_best_LDA(best_media, df)
-    #gen_best_LDA(best_diplo, df)
+    gen_best_LDA(best_diplo, df)
