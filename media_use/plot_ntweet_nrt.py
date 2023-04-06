@@ -55,9 +55,39 @@ def plot_ax(tweets, ax, measure):
     return ax
 
 
+def plot_joy_anger(data, ax):
+    
+    joy = df.groupby(['created_at'])['joy'].mean()
+    anger = df.groupby(['created_at'])['anger'].mean()
+    
+    # plot the values
+    ## joy
+    ax.plot(joy.index, joy.values, linewidth = 1, alpha = 0.4, color = 'green')
+    gaussian = joy.rolling(window=50, win_type='gaussian', center=True, min_periods=1).mean(std = 10)
+    ax.plot(joy.index, gaussian, alpha=1, linewidth = 1, color = 'darkgreen')
+    
+    ## anger
+    ax.plot(anger.index, anger.values, linewidth = 1, alpha = 0.4, color = 'red')
+    gaussian = anger.rolling(window=50, win_type='gaussian', center=True, min_periods=1).mean(std = 10)
+    ax.plot(anger.index, gaussian, alpha=1, linewidth = 1, color = 'darkred')
+    
+
+    # dates on the x-axis
+    ax.xaxis_date()
+    ax.xaxis.set_major_locator(locator)
+    ax.xaxis.set_major_formatter(date_form)
+
+    # turn the labels on the x-axis 180 degrees and remove every second one
+    for i, label in enumerate(ax.xaxis.get_ticklabels()):
+        label.set_rotation(90)
+        if i % 2 == 0:
+            label.set_visible(False)
+
+    return ax
+
 def plot_all(data_list, title_list, lang = 'all'):
     counter = -1
-    fig, axs = plt.subplots(2, 3, figsize = (20, 10), sharex=True, sharey="row")
+    fig, axs = plt.subplots(3, 3, figsize = (20, 10), sharex=True, sharey="row")
     
     for data in data_list:
         if lang != 'all': # only keep the data for the specified language
@@ -69,6 +99,7 @@ def plot_all(data_list, title_list, lang = 'all'):
 
         axs[0, counter] = plot_ax(data, axs[0, counter], measure = 'tweets')
         axs[1, counter] = plot_ax(data, axs[1, counter], measure = 'retweets')
+        axs[2, counter] = plot_joy_anger(data, axs[2, counter])
 
     # set the titles of the plots
     for i, title in enumerate(title_list):
@@ -97,6 +128,14 @@ def plot_all(data_list, title_list, lang = 'all'):
 if __name__ == '__main__':
     # read in the data
     df = pd.read_csv('media_info.csv')
+    emo = pd.read_csv(os.path.join('..', 'emotion_classification', 'data', 'emotion_diplomat_data.csv'), usecols = ['tweetID', 'joy', 'love', 'anger', 'sadness', 'fear', 'surprise'])
+    print(len(emo['tweetID']))
+    print(len(df['tweetID']))
+    df = pd.merge(df, emo, how="inner", on = "tweetID")
+    print(len(df['tweetID']))
+
+
+    # merge
 
     # date time format
     df['created_at'] = pd.to_datetime(df['created_at'], format = '%Y-%m-%d')
