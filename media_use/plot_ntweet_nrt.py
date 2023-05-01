@@ -57,8 +57,8 @@ def plot_ax(tweets, ax, measure):
 
 def plot_joy_anger(data, ax):
     
-    joy = df.groupby(['created_at'])['joy'].mean()
-    anger = df.groupby(['created_at'])['anger'].mean()
+    joy = data.groupby(['created_at'])['joy'].mean()
+    anger = data.groupby(['created_at'])['anger'].mean()
     
     # plot the values
     ## joy
@@ -129,14 +129,10 @@ if __name__ == '__main__':
     # read in the data
     df = pd.read_csv('media_info.csv')
     emo = pd.read_csv(os.path.join('..', 'emotion_classification', 'data', 'emotion_diplomat_data.csv'), usecols = ['tweetID', 'joy', 'love', 'anger', 'sadness', 'fear', 'surprise'])
-    print(len(emo['tweetID']))
-    print(len(df['tweetID']))
     df = pd.merge(df, emo, how="inner", on = "tweetID")
-    print(len(df['tweetID']))
 
 
     # merge
-
     # date time format
     df['created_at'] = pd.to_datetime(df['created_at'], format = '%Y-%m-%d')
     
